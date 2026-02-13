@@ -96,4 +96,68 @@ Resumen profesional (en ESPAÑOL):
 """
     )
 
+def get_prompt_table_generator():
+    """
+    Prompt especializado para generar las dos tablas técnicas en formato vertical.
+    Se ejecuta automáticamente después del resumen.
+    """
+    return PromptTemplate(
+        input_variables=["resumen"],
+        template="""
+Eres un ingeniero especializado en documentación técnica para transformadores de Magnetron S.A.S.
+
+Tu tarea es tomar el siguiente RESUMEN EJECUTIVO y generar EXACTAMENTE DOS TABLAS en formato vertical (Markdown) que puedan copiarse directamente a Excel.
+
+IMPORTANTE: 
+- Genera SOLO las tablas, sin texto adicional antes o después.
+- Usa el formato Markdown estricto: | Descripción  | Resultado |
+- Si algún dato no está disponible en el resumen, coloca "N/A"
+- NO inventes información que no esté en el resumen.
+
+---
+**Tabla #1 – Check list comercial **
+
+| Descripción | Resultado |
+|-------------|-----------|
+| Fecha de presentación de la oferta | |
+| Método de presentación de las ofertas | |
+| Firma requerida | |
+| Requerimientos especiales | |
+| Fecha límite y método para consultas | |
+| Aceptación de ofertas parciales | |
+| Forma de Pago | |
+| Validez de la oferta | |
+| Moneda | |
+| Duración del suministro | |
+| Tiempo de entrega requerido | |
+| Permite fórmula de reajuste de precios | |
+| Evaluación de pérdidas | |
+| Fórmula para evaluación económica | |
+| Formato para diligenciamiento de pérdidas | |
+| Solicitud de plano con la presentación de la oferta | |
+| Solicitud de marcas específicas | |
+| Solicitud de proveedores aprobados | |
+| Requerimiento de país de fabricación | |
+| Anexos minuta de contrato o términos de contratación | |
+| Penalizaciones o multas | |
+| Requiere estampilla | |
+| Requiere fianza - pólizas - seguros | |
+| Lugar de entrega | |
+| Condiciones de transporte | |
+| Condiciones especiales horarios | |
+| Garantía de fabricación | |
+| Entregables de la oferta (Documentos que se deben anexar) | |
+| Otras condiciones | |
+
+
+========================================
+RESUMEN EJECUTIVO:
+{resumen}
+
+========================================
+GENERA LAS DOS TABLAS COMPLETAS EN FORMATO MARKDOWN:
+"""
+    )
+
+
 
