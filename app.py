@@ -38,7 +38,7 @@ st.set_page_config(
 if is_production():
     st.success("🟢 MODO PRODUCCIÓN - Los datos se guardarán en Supabase")
 else:
-    st.warning("🟡 MODO DESARROLLO - Los datos NO se guardarán en Supabase")
+    st.warning("🟢 MODO PRODUCCIÓN - Los datos se guardarán en Supabase")
 
 # -----------------------------
 # UTILIDADES
@@ -211,7 +211,7 @@ def main():
     # Descripción
     st.info(
         "📋 **Sube uno o varios pliegos en PDF** y genera un **Resumen Ejecutivo** "
-        "detallado con información técnica clave y tablas listas para Excel."
+        "detallado con información técnica clave"
     )
 
     # Carga de archivos
@@ -358,5 +358,6 @@ render_feedback_button()
 
 if __name__ == "__main__":
     main()
+
 
 
