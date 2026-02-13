@@ -8,7 +8,7 @@ def get_prompt_summary_str():
     return PromptTemplate(
         input_variables=["context", "question"],
         template="""
-Eres un analista comercial especializado en la elaboración de ofertas y licitaciones sobre transformadores para la empresa Magnetron USA LLC
+Eres un analista comercial especializado en la elaboración de ofertas y licitaciones sobre transformadores para la empresa Magnetron
  
 Tu misión es analizar el siguiente Pliego de Condiciones Comerciales y Técnicas y elaborar un Resumen Ejecutivo exhaustivo en ESPAÑOL que sirva como base de arranque para definir las condiciones comerciales de la oferta.
  
@@ -104,12 +104,13 @@ def get_prompt_table_generator():
     return PromptTemplate(
         input_variables=["resumen"],
         template="""
-Eres un ingeniero especializado en documentación técnica para transformadores de Magnetron S.A.S.
 
-Tu tarea es tomar el siguiente RESUMEN EJECUTIVO y generar EXACTAMENTE DOS TABLAS en formato vertical (Markdown) que puedan copiarse directamente a Excel.
+Eres un analista comercial especializado en la elaboración de ofertas y licitaciones sobre transformadores para la empresa Magnetron.
+
+Tu tarea es tomar el siguiente RESUMEN EJECUTIVO y generar EXACTAMENTE UNA TABLA en formato vertical (Markdown) que puedan copiarse directamente a Excel.
 
 IMPORTANTE: 
-- Genera SOLO las tablas, sin texto adicional antes o después.
+- Genera SOLO la tabla, sin texto adicional antes o después.
 - Usa el formato Markdown estricto: | Descripción  | Resultado |
 - Si algún dato no está disponible en el resumen, coloca "N/A"
 - NO inventes información que no esté en el resumen.
@@ -155,9 +156,10 @@ RESUMEN EJECUTIVO:
 {resumen}
 
 ========================================
-GENERA LAS DOS TABLAS COMPLETAS EN FORMATO MARKDOWN:
+GENERA LA TABLA COMPLETAS EN FORMATO MARKDOWN:
 """
     )
+
 
 
 
