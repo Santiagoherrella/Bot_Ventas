@@ -17,7 +17,7 @@ from database_supabase import (
     buscar_por_nombre_pdf,
     is_production
 )
-
+from table_generator import generar_tablas_desde_resumen
 # ====================================
 
 # -----------------------------
@@ -269,7 +269,11 @@ def main():
                                 st.session_state.ultimo_resumen = resumen
                             
                             st.session_state.nombre_pdfs = nombre_pdf
-
+                            # Generar tablas en paralelo
+                            with st.spinner("📊 Generando tablas técnicas en paralelo..."):
+                                tablas = generar_tablas_desde_resumen(resumen, llm)
+                                st.session_state.ultimas_tablas = tablas
+    
                             try:
                                 guardar_analisis(
                                     nombre_archivo=nombre_pdf,
@@ -308,6 +312,34 @@ def main():
                 use_container_width=True,
                 key="download_resumen"
             )
+                    
+        with col_tablas:
+            st.markdown("### 📊 Tablas Técnicas")
+            
+            if st.session_state.ultimas_tablas:
+                st.markdown(st.session_state.ultimas_tablas)
+                
+                # Botón descarga tablas
+                st.download_button(
+                    label="📥 Descargar Tablas (Markdown)",
+                    data=st.session_state.ultimas_tablas,
+                    file_name=f"tablas_{nombre_archivo}.md",
+                    mime="text/markdown",
+                    use_container_width=True,
+                    key="download_tablas"
+                )
+            else:
+                st.info("⏳ Las tablas se generan automáticamente después del resumen")
+
+    # Footer
+    st.markdown("---")
+    st.markdown(
+        '<div style="text-align: center; color: gray;">'
+        'Magnetron S.A.S. | Analizador de Pliegos Técnicos v2.1'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
     
 # ----------------------------- 
 # BOTÓN DE FEEDBACK FLOTANTE
@@ -358,6 +390,7 @@ render_feedback_button()
 
 if __name__ == "__main__":
     main()
+
 
 
 
