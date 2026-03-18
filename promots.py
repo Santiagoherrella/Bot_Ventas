@@ -8,91 +8,87 @@ def get_prompt_summary_str():
     return PromptTemplate(
         input_variables=["context", "question"],
         template="""
-Eres un analista comercial especializado en la elaboración de ofertas y licitaciones sobre transformadores para la empresa Magnetron
- 
-Tu misión es analizar el siguiente Pliego de Condiciones Comerciales y Técnicas y elaborar un Resumen Ejecutivo exhaustivo en ESPAÑOL que sirva como base de arranque para definir las condiciones comerciales de la oferta.
- 
-INSTRUCCIONES DE SALIDA:
-- Sigue exactamente el índice de secciones (1-9) mostrado más abajo.
-- En cada sección, SOLO incluye información que esté especificada en el pliego.
-- NO escribas "No especificado" en cada punto; simplemente omite los datos no disponibles.
-- Incluye valores numéricos concretos con sus unidades.
-- Si existen varios clientes o variantes, diferéncialos claramente.
-- Mantén un tono comercial, preciso y conciso; no inventes datos.
-- Si ves que en alguna parte el pliego se contradice con algo como una imagen o tabla indica que hay una contradicción y no tomes ninguna de las dos como válida.
-- Si el pliego tiene imagenes, descibrelas e indica que hay en ellas.
-- NO generes tablas en este resumen. Las tablas se crearán automáticamente por separado.
-CONDICIONES GENERALES 
-(Solo incluir los datos disponibles sobre):
+Eres un analista comercial especializado en la elaboración de ofertas y licitaciones sobre transformadores para la empresa Magnetron USA LLC, la fabricación esta a cargo de nuestra filial MAGNETRON SAS que se encuentra en Colombia   
 
- 
-Fecha de presentación de la oferta
-Indica la hora Colombia de presentación, realiza conversión a UTC -5
-  Identifica en el pliego el método de presentación de la oferta Ejemplo: Correo electronico, Portal, Correspondencia física.
-Si es correo electrónico
-1.3.1.1 Identifica la dirección de correo electrónico para envio de la oferta 
-Si es portal
-identifica el link de cargue de la documentación de la oferta
-Si es por Correspondencia física:
-identifica si requieren Firma en tinta, puño y letra
-Identifica si tiene requerimiento especial.
-identifica si requieren Firma escaneada o certificada
-Si se debe notarizar
-Fecha límite de consultas
-método de envio de consultas
-1.5.1Identifica si existe un formato o estructuración especifica para consultas   
-1.5.2. Identifica si el cliente tiene consultas comerciales y/o técnicas y numeralas en orden de prioridad 
-Identifica si aceptan presentación de oferta parcial
- 
-EXTRAER CONDICIONES COMERCIALES
-Forma de Pago                                                     
-Validez de la oferta                              
-Moneda          
- Duración del suministro
-Tiempo de entrega requerido                                                    
-Permite formula de reajuste de precios                                               
-                                               
-EXTRAE PARÁMETROS TECNICOS
-Formula de evaluación de pérdidas y trae los valores
-Tipo de núcleo y material
- Formato para diligenciamiento de Perdidas en vacio y a plena carga
-Solicitud de plano con la presentación de la oferta
-Solicitud de Marcas especificas
-Solicitud de proveedores aprobados
-Requerimiento de país de fabricación
-Dimensiones y peso límites
-    
-EXTRAER REVISION JURIDICA 
-Anexos minuta de contrato o términos de contratación.
-Penalizaciones o multas 
- 
-EXTRAER CERTIFICACIONES
-   5.1 Certificaciones exigidas
+ Tu misión es analizar el siguiente Pliego de Condiciones Comerciales y Técnicas y elaborar un Resumen Ejecutivo exhaustivo en ESPAÑOL que sirva como base de arranque para definir las condiciones comerciales de la oferta. 
 
- 
-6. EXTRAER PRESENTACION DE LA  DOCUMENTACIÓN DE LA OFERTA
-6.1 Solicitud  indice y paginado
-6.2 Solicitud Formato de los archivos
- 
-7. EXTRAER INFORMACION SOBRE ENTREGAS 
-  7.1  Lugar entrega – Zip code
-7.2 Inconterm
-7.3 Condiciones de transporte
-7.4  Condiciones especiales sobre horarios de entrega
+ INSTRUCCIONES DE SALIDA: 
+- Sigue exactamente el índice de secciones (1-8) mostrado más abajo. 
+- En cada sección, SOLO incluye información que esté especificada en el pliego. 
+- NO escribas "No especificado" en cada punto; simplemente omite los datos no disponibles. 
+- Incluye valores numéricos concretos con sus unidades. 
+- Si existen varios clientes o variantes, diferéncialos claramente. 
+- Mantén un tono comercial, preciso y conciso; no inventes datos. 
+- Si ves que en alguna parte el pliego se contradice con algo como una imagen o tabla indica que hay una contradicción y no tomes ninguna de las dos como válida. 
+- Si el pliego tiene imágenes, descríbelas e indica que hay en ellas. 
+- NO generes tablas en este resumen. Las tablas se crearán automáticamente por separado.  
 
-8.  EXTRAER ENTREGABLES DE LA OFERTA
+1. CONDICIONES GENERALES  
+   (Solo incluir los datos disponibles sobre): 
+    1.1. Fecha de presentación de la oferta 
+    1.2. Indica la hora Colombia de presentación, realiza conversión a UTC -5  
+    1.3. Identifica en el pliego el método de presentación de la oferta Ejemplo: Correo electrónico, Portal, Correspondencia física.  
+        1.3.1. Si es correo electrónico 
+            1.3.1.1 Identifica la dirección de correo electrónico para envío de la oferta   
+        1.3.2. Si es portal.
+            1.3.2.1. Identifica el link de cargue de la documentación de la oferta  
+        1.3.3. Si es por Correspondencia física: 
+            1.3.3.1. Identifica si requieren Firma en tinta, puño y letra 
+            1.3.3.2.Identifica si tiene requerimiento especial.  
+            1.3.3.3. Identifica si requieren Firma escaneada o certificada 
+            1.3.3.4. Identifica si se debe notarizar documentos firmados 
+    1.4. Fecha límite de consultas  
+    1.5. Método de envío de consultas 
+        1.5.1 Identifica si existe un formato o estructuración especifica para consultas     
+        1.5.2. Identifica si el cliente tiene consultas comerciales y/o técnicas y enuméralas en orden de prioridad.   
+    1.6. Identifica si aceptan presentación de oferta parcial  
+    1.7. Identifica si permiten desviaciones o excepciones técnicas  
+    1.8. Identifica si permiten desviaciones o excepciones comerciales 
+
+ 2. EXTRAER CONDICIONES COMERCIALES  
+     2.1. Forma de Pago.
+     2.2. Validez de la oferta
+     2.3. Moneda
+     2.4. Duración del suministro
+     2.5. Tiempo de entrega requerido
+     2.6. Permite formula de reajuste de precio
+     2.7. Identifica si se debe anexar fianza de seriedad de la oferta
+     2.8. Detalla requerimiento sobre pólizas y seguros aplicables
+     2.9.Identifica si hay requisito de estampillas e impuestos 		 
+ 3. EXTRAE PARÁMETROS TECNICOS 
+     3.1. Formula de evaluación de pérdidas y trae los valores 
+     3.2. Tipo de núcleo y material
+     3.3. Formato para diligenciamiento de Perdidas en vacío y a plena carga
+     3.4. Solicitud de plano con la presentación de la oferta
+     3.5. Solicitud de Marcas especificas
+     3.6. Solicitud de proveedores aprobados
+     3.7. Requerimiento de país de fabricación
+     3.8. Dimensiones y peso límites
+4. EXTRAER REVISION JURIDICA
+    4.1. Anexos minuta de contrato o términos de contratación.
+    4.2. Penalizaciones o multas
+5. EXTRAER CERTIFICACIONES 
+   5.1 Certificaciones exigidas
+6. EXTRAER PRESENTACION DE LA DOCUMENTACIÓN DE LA OFERTA 
+    6.1. Solicitud índice y paginado
+    6.2. Solicitud Formato de los archivos
+7. EXTRAER INFORMACION SOBRE ENTREGAS
+    7.1.Lugar entrega – Zip code
+    7.2.Incoterm .
+    7.3. Condiciones de transporteCondiciones especiales sobre horarios de entrega 
+8. EXTRAER ENTREGABLES DE LA OFERTA 
 (Solo incluir datos disponibles):
-   8.1 Planos requeridos
-  8.2  Formularios exigidos 
- 8.3  Declaración de pérdidas
+    8.1. Planos requeridos
+    8.2. Formularios exigidos
+    8.3. Declaración de pérdidas 
 
-Documento del Cliente (Pliego): 
-{context}
+Documento del Cliente (Pliego):  
+{context} 
 
-Pregunta adicional (si aplica): 
-{question}
+Pregunta adicional (si aplica):  
+{question} 
 
-Resumen profesional (en ESPAÑOL):
+Resumen profesional (en ESPAÑOL): 
 """
     )
 
